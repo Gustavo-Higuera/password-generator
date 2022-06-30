@@ -33,21 +33,40 @@ function generatePassword() {
 
   // WHEN asked for character types to include in the password
   // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters 
-  var lowercasePass = confirm("Would you like to include lowercase letters in your password? Ok for yes, Cancel for no.");
-  var uppercasePass = confirm("Would you like to include uppercase letters in your password? Ok for yes, Cancel for no.");
-  var numericPass = confirm("Would you like to include numbers in your password? Ok for yes, Cancel for no.");
-  var specialPass = confirm("Would you like to include special characters in your password? Ok for yes, Cancel for no.");
+  var lowercaseConfirm = confirm("Would you like to include lowercase letters in your password? Ok for yes, Cancel for no.");
+  var uppercaseConfirm = confirm("Would you like to include uppercase letters in your password? Ok for yes, Cancel for no.");
+  var numericConfirm = confirm("Would you like to include numbers in your password? Ok for yes, Cancel for no.");
+  var specialConfirm = confirm("Would you like to include special characters in your password? Ok for yes, Cancel for no.");
 
   // WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
-  if (lowercasePass || uppercasePass || numericPass || specialPass) {
-    // this is confirming that the conditional statement is recognizing at least one password type was selected
-    console.log(lowercaseArray);
+  if (lowercaseConfirm || uppercaseConfirm || numericConfirm || specialConfirm) {
+
+    var selectedChar = [];
+
+    if (lowercaseConfirm) {
+      selectedChar = selectedChar.concat(lowercaseArray);
+    } if (uppercaseConfirm) {
+      selectedChar = selectedChar.concat(uppercaseArray);
+    } if (numericConfirm) {
+      selectedChar = selectedChar.concat(numericArray);
+    } if (specialConfirm) {
+      selectedChar = selectedChar.concat(specialArray);
+    }
+
+
+
+    for (let i = 0; i < passwordLength; i++) {
+      var randomChar = selectedChar[Math.floor(Math.random() * passwordLength)];
+
+      console.log(randomChar);
+
+    }
+
   } else {
     alert("Please select at least one charcter type!");
     return generatePassword();
   }
-
 }
 
 // WHEN all prompts are answered
