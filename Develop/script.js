@@ -54,8 +54,6 @@ function generatePassword() {
       selectedChar = selectedChar.concat(specialArray);
     }
 
-
-
     for (let i = 0; i < passwordLength; i++) {
       var randomChar = selectedChar[Math.floor(Math.random() * passwordLength)];
 
