@@ -1,3 +1,15 @@
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
+// These are variables containing arrays for each password character type (these are in the global scope)
+var lowercaseArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var uppercaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var numericArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var specialArray = ["~", "!", "@", "$", "%", "^", "&", "*", "#"]
+
 // WHEN I click the button to generate a password
 // THEN I am presented with a series of prompts for password criteria
 // WHEN prompted for password criteria
@@ -29,7 +41,8 @@ function generatePassword() {
   // WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
   if (lowercasePass || uppercasePass || numericPass || specialPass) {
-    console.log("You have done this part correct");
+    // this is confirming that the conditional statement is recognizing at least one password type was selected
+    console.log(lowercaseArray);
   } else {
     alert("Please select at least one charcter type!");
     return generatePassword();
@@ -43,9 +56,6 @@ function generatePassword() {
 // THEN the password is either displayed in an alert or written to the page
 
 
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -55,5 +65,3 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
