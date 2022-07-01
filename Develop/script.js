@@ -8,7 +8,7 @@ generateBtn.addEventListener("click", writePassword);
 var lowercaseArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var uppercaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numericArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specialArray = ["~", "!", "@", "$", "%", "^", "&", "*", "#"]
+var specialArray = ["~", "!", "@", "$", "%", "&", "*", "#"]
 
 // WHEN I click the button to generate a password
 // THEN I am presented with a series of prompts for password criteria
@@ -54,13 +54,17 @@ function generatePassword() {
       selectedChar = selectedChar.concat(specialArray);
     }
 
+    // This is where the values for randomChar is being stored
+    var completedPassword = [];
     for (let i = 0; i < passwordLength; i++) {
-      var randomChar = selectedChar[Math.floor(Math.random() * passwordLength)];
+      // This was executing for the loop.. to store it somewhere... it needs another empty array
+      var randomChar = selectedChar[Math.floor(Math.random() * selectedChar.length)];
 
-      console.log(randomChar);
-
+      completedPassword.push(randomChar);
+    
     }
-
+    return completedPassword.join("");
+    
   } else {
     alert("Please select at least one charcter type!");
     return generatePassword();
@@ -74,7 +78,7 @@ function generatePassword() {
 
 
 // Write password to the #password input
-function writePassword() {
+function writePassword(completedPassword) {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
