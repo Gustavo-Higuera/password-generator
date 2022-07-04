@@ -2,6 +2,8 @@
 var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
+// WHEN I click the button to generate a password
+// THEN I am presented with a series of prompts for password criteria
 generateBtn.addEventListener("click", writePassword);
 
 // These are variables containing arrays for each password character type (these are in the global scope)
@@ -10,26 +12,21 @@ var uppercaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"
 var numericArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialArray = ["~", "!", "@", "$", "%", "&", "*", "#"]
 
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
+
 function generatePassword() {
+  // WHEN prompted for password criteria
+  // THEN I select which criteria to include in the password
+  // WHEN prompted for the length of the password
+  // THEN I choose a length of at least 8 characters and no more than 128 characters
   var passwordLength = prompt("How many characters would you like your password? Please type in a number ranging from 8 to 128.");
   if (isNaN(passwordLength)) {
     alert("Please enter a number ranging from 8 to 128.");
     return generatePassword();
   }
-  if (passwordLength < 8) {
+  if (passwordLength < 8 || passwordLength > 128) {
     alert("Please enter a number ranging from 8 to 128.");
     return generatePassword();
   }
-  if (passwordLength > 128) {
-    alert("Please enter a number ranging from 8 to 128.");
-    return generatePassword();
-  };
 
   // WHEN asked for character types to include in the password
   // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters 
@@ -54,35 +51,37 @@ function generatePassword() {
       selectedChar = selectedChar.concat(specialArray);
     }
 
-    // This is where the values for randomChar is being stored
+    // WHEN all prompts are answered
+    // THEN a password is generated that matches the selected criteria
+    // This is where the values for randomChar are being stored
     var completedPassword = [];
     for (let i = 0; i < passwordLength; i++) {
-      // This was executing for the loop.. to store it somewhere... it needs another empty array
+      // randomChar is storing the randomized array values... it needs another empty array to place those values into
       var randomChar = selectedChar[Math.floor(Math.random() * selectedChar.length)];
 
+      // this is taking the empty array completedPassword, and inserting the values from randomChar into it
       completedPassword.push(randomChar);
-    
+
     }
+    // this returns completed password to the function call.. join "" is removing the commas from the array
     return completedPassword.join("");
-    
+
   } else {
     alert("Please select at least one charcter type!");
     return generatePassword();
   }
 }
 
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
+
 
 
 // Write password to the #password input
 function writePassword(completedPassword) {
+  // WHEN the password is generated
+  // THEN the password is either displayed in an alert or written to the page
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
